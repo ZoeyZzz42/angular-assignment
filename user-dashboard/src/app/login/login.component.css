@@ -30,3 +30,22 @@
 .btn-primary:hover {
     background-color: #0056b3;
 }
+
+.back-button-container {
+    position: absolute;
+    top: 20px; 
+    right: 20px; 
+    z-index: 100; 
+  }
+  .btn-back {
+    padding: 5px 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-back:hover {
+    background-color: #e2e6ea;
+  }
+  
