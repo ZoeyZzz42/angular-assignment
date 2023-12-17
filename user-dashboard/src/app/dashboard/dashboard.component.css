@@ -69,4 +69,9 @@
   .alert-danger {
     background-color: #dc3545;
   }
+
+  .form-group .error {
+    color: #dc3545;
+    margin-top: 5px;
+  }
   

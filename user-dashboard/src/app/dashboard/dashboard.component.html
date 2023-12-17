@@ -12,12 +12,29 @@
     </ul>
     <div *ngIf="selectedUser">
         <h3>Update User</h3>
-        <form (ngSubmit)="updateUser()">
-          <input type="text" [(ngModel)]="selectedUser.username" name="username">
-          <input type="email" [(ngModel)]="selectedUser.email" name="email">
-          <button type="submit">Submit</button>
-          <button type="button" (click)="cancelUpdate()">Cancel</button>
+        <form (ngSubmit)="updateUser()" #updateForm="ngForm">
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" class="form-control"
+                   required [(ngModel)]="selectedUser.username" name="username" #usernameField="ngModel">
+            <div *ngIf="usernameField.invalid && usernameField.touched" class="error">
+              Username is required.
+            </div>
+          </div>
+      
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" class="form-control"
+                   required email [(ngModel)]="selectedUser.email" name="email" #emailField="ngModel">
+            <div *ngIf="emailField.invalid && emailField.touched" class="error">
+              <div *ngIf="emailField.errors?.['required']">Email is required.</div>
+              <div *ngIf="emailField.errors?.['email']">Invalid email format.</div>
+            </div>
+          </div>
+      
+          <button type="submit" class="btn btn-primary" [disabled]="!updateForm.valid">Submit</button>
+          <button type="button" class="btn btn-secondary" (click)="cancelUpdate()">Cancel</button>
         </form>
-     </div>
+      </div>
 </div>
   

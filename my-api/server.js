@@ -18,6 +18,8 @@ connection.connect();
 const app = express();
 const port = 3000;
 
+const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -78,6 +80,10 @@ app.post('/register', (req, res) => {
   
     let query = 'UPDATE users SET ';
     let values = [];
+
+    if (email && !emailRegex.test(email)) {
+      return res.status(400).send('Invalid email format');
+    }
 
     if (username) {
         query += 'username = ?, ';

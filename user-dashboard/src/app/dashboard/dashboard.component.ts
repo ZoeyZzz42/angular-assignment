@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { UserService } from '../user.service';
 import { forkJoin } from 'rxjs';
 
@@ -11,6 +12,8 @@ import { forkJoin } from 'rxjs';
 export class DashboardComponent implements OnInit {
   users: any[] = [];
   selectedUser: any = null;
+
+  @ViewChild('updateForm') updateForm!: NgForm;
 
   constructor(private userService: UserService) {}
 
@@ -52,7 +55,7 @@ export class DashboardComponent implements OnInit {
   }
 
   updateUser() {
-    if (this.selectedUser) {
+    if (this.updateForm && this.updateForm.valid) {
       this.userService.updateUser(this.selectedUser.id, this.selectedUser).subscribe(
         () => {
           this.loadUsers();
