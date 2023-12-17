@@ -28,9 +28,7 @@ export class SignupComponent {
       response => {
         console.log('Success!', response);
         this.successMessage = 'Registration successful! Redirecting...';
-        this.user = { username: '', email: '', password: '' };
         this.isLoading = false;
-        this.signupForm.reset();
         setTimeout(() => {
           this.router.navigate(['/login']);
         }, 3000);
