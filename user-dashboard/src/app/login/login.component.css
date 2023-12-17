@@ -48,4 +48,15 @@
   .btn-back:hover {
     background-color: #e2e6ea;
   }
+
+  .alert-danger {
+    color: #dc3545; 
+    margin-top: 10px;
+  }  
+
+  .alert-success {
+    color: #155724; 
+    background-color: #d4edda;
+    margin-top: 10px;
+  }
   

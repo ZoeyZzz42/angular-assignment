@@ -21,7 +21,12 @@
                 Password is required.
             </div>
         </div>
-
+        <div *ngIf="successMessage" class="alert alert-success">
+            {{ successMessage }}
+        </div>
+        <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+        </div>
         <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Login</button>
     </form>
 </div>

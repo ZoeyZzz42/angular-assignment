@@ -10,7 +10,11 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   register(user: any) {
-    return this.http.post('http://localhost:3000/register', user, { responseType: 'text' });
+    return this.http.post(`${this.apiUrl}/login`, user, { responseType: 'text' });
+  }
+
+  login(user: any) {
+    return this.http.post(`${this.apiUrl}/login`, user);
   }
 
 }
