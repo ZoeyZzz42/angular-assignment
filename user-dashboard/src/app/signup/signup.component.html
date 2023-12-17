@@ -25,10 +25,14 @@
       <div class="form-group">
         <label for="email">Email: </label>
         <input type="email" id="email" class="form-control" required
-               [(ngModel)]="user.email" name="email" #email="ngModel" />
-        <div *ngIf="email.invalid && (email.dirty || email.touched || signupForm.submitted)" class="error">
-          <div *ngIf="email.errors?.['required']">Email is required.</div>
-          <div *ngIf="email.errors?.['email']">Please enter a valid email address.</div>
+               email [(ngModel)]="user.email" name="email" #emailField="ngModel">
+        <div *ngIf="emailField.errors && (emailField.dirty || emailField.touched || signupForm.submitted)" class="error">
+          <div *ngIf="emailField.errors?.['required']">
+            Email is required.
+          </div>
+          <div *ngIf="emailField.errors?.['email']">
+            Please enter a valid email address.
+          </div>
         </div>
       </div>
       
