@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../user.service';
 import { forkJoin } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,9 +16,12 @@ export class DashboardComponent implements OnInit {
 
   @ViewChild('updateForm') updateForm!: NgForm;
 
-  constructor(private userService: UserService) {}
-
+  constructor(private userService: UserService, private router: Router) {}
  
+  goBack() {
+    this.router.navigate(['/']);
+  }
+
   ngOnInit(): void {
     this.loadUsers();
   }

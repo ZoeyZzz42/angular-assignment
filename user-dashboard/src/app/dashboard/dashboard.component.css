@@ -3,6 +3,22 @@
     max-width: 800px;
     margin: auto;
   }
+
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .header-actions button:first-child {
+    margin-left: auto; 
+  }
   
   h2 {
     text-align: center;

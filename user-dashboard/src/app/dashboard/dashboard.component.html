@@ -1,9 +1,12 @@
 <div class="dashboard-container">
-    <h2>Users</h2>
-  
-    <button (click)="deleteSelectedUsers()">Delete Selected</button>
-    <button (click)="selectUserForUpdate()">Update Selected</button>
-  
+    <div class="dashboard-header">
+        <h2>Users</h2>
+        <div class="dashboard-actions">
+          <button (click)="deleteSelectedUsers()">Delete Selected</button>
+          <button (click)="selectUserForUpdate()">Update Selected</button>
+        <button (click)="goBack()">Back</button>
+        </div>
+    </div>
     <ul>
       <li *ngFor="let user of users">
         <input type="checkbox" [(ngModel)]="user.selected">
