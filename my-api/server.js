@@ -6,7 +6,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const connection = mysql.createConnection({
-  host: 'localhost',
+  host: '127.0.0.1',
+  port: '55002',
   user: 'root',
   password: 'hallowelt', 
   database: 'userdb'

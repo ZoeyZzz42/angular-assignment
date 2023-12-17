@@ -1,20 +1,40 @@
 import { Component } from '@angular/core';
+import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
   user = {
     username: '',
     email: '',
     password: ''
-  };
+  };  
 
-  onSignup(form: any): void {
-    if (form.valid) {
-      console.log('Signup Data:', this.user);
-    }
+  successMessage: string = '';
+  errorMessage: string = '';
+  isLoading: boolean = false;
+
+  constructor(private userService: UserService, private router: Router) { }
+
+  onSignup(): void {
+    this.userService.register(this.user).subscribe(
+      response => {
+        console.log('Success!', response);
+        this.successMessage = 'Registration successful!';
+        this.user = { username: '', email: '', password: '' };
+        this.router.navigate(['/login']);
+        this.isLoading = false;
+      },
+      error => {
+        console.error('Error!', error);
+        this.isLoading = false;
+        this.errorMessage = error.error || 'An error occurred during registration.';
+      }
+    );
   }
+
 }

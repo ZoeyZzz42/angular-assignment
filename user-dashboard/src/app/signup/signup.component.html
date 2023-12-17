@@ -3,7 +3,13 @@
 </div>
 <div class="signup-container">
     <h2>Sign Up</h2>
-    <form #signupForm="ngForm" (ngSubmit)="onSignup(signupForm)" novalidate>
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+    <form #signupForm="ngForm" (ngSubmit)="onSignup()" novalidate>
       
       <div class="form-group">
         <label for="username">Username: </label>
@@ -36,7 +42,7 @@
         </div>
       </div>
       
-      <button type="submit" class="btn btn-success" [disabled]="!signupForm.valid">Sign Up</button>
+      <button type="submit" class="btn btn-success" [disabled]="!signupForm.valid || isLoading">Sign Up</button>
     </form>
 </div>
   
