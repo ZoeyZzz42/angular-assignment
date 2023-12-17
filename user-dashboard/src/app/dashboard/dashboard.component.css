@@ -15,10 +15,6 @@
     display: flex;
     gap: 10px;
   }
-
-  .header-actions button:first-child {
-    margin-left: auto; 
-  }
   
   h2 {
     text-align: center;
@@ -89,5 +85,10 @@
   .form-group .error {
     color: #dc3545;
     margin-top: 5px;
+  }
+
+  .logout {
+    background-color: #dc3545;
+    color: white;
   }
   

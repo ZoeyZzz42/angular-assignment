@@ -18,8 +18,9 @@ export class DashboardComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router) {}
  
-  goBack() {
-    this.router.navigate(['/']);
+  logout() {
+    localStorage.removeItem('token'); 
+    this.router.navigate(['/login']);
   }
 
   ngOnInit(): void {
