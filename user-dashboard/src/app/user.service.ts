@@ -24,4 +24,8 @@ export class UserService {
   deleteUser(userId: number) {
     return this.http.delete(`${this.apiUrl}/user/${userId}`);
   }
+
+  updateUser(userId: number, userData: any) {
+    return this.http.put(`${this.apiUrl}/user/${userId}`, userData, { responseType: 'text' });
+  }  
 }

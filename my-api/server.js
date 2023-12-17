@@ -76,24 +76,42 @@ app.post('/register', (req, res) => {
     const { id } = req.params;
     const { username, email, password } = req.body;
   
-    let hashedPassword;
-    if (password) {
-      hashedPassword = await bcrypt.hash(password, 10);
+    let query = 'UPDATE users SET ';
+    let values = [];
+
+    if (username) {
+        query += 'username = ?, ';
+        values.push(username);
     }
-  
-    const query = 'UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?';
-    connection.query(query, [username, email, hashedPassword || password, id], (error, results) => {
-      if (error) {
-        return res.status(500).send('Server error');
-      }
-  
-      if (results.affectedRows === 0) {
-        return res.status(404).send('User not found');
-      }
-  
-      res.status(200).send('User updated successfully');
+
+    if (email) {
+        query += 'email = ?, ';
+        values.push(email);
+    }
+
+    if (password) {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        query += 'password = ?, ';
+        values.push(hashedPassword);
+    }
+
+    query = query.slice(0, -2);
+    
+    query += ' WHERE id = ?';
+    values.push(id);
+
+    connection.query(query, values, (error, results) => {
+        if (error) {
+            return res.status(500).send('Server error');
+        }
+
+        if (results.affectedRows === 0) {
+            return res.status(404).send('User not found');
+        }
+
+        res.status(200).send('User updated successfully');
     });
-  });
+});
 
   app.delete('/user/:id', (req, res) => {
     const { id } = req.params;

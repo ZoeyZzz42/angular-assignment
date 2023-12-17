@@ -10,6 +10,7 @@ import { forkJoin } from 'rxjs';
 
 export class DashboardComponent implements OnInit {
   users: any[] = [];
+  selectedUser: any = null;
 
   constructor(private userService: UserService) {}
 
@@ -20,7 +21,9 @@ export class DashboardComponent implements OnInit {
 
   loadUsers() {
     this.userService.getAllUsers().subscribe(
-      data => this.users = data,
+      data => {
+        this.users = data.map(user => ({ ...user, selected: false }));
+      },
       error => console.error('Error fetching users', error)
     );
   }
@@ -38,8 +41,30 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  updateUser(user: any) {
-    // Logic to update user
+  selectUserForUpdate() {
+    const selectedUsers = this.users.filter(user => user.selected);
+    if (selectedUsers.length === 1) {
+      this.selectedUser = { ...selectedUsers[0] };
+    } else {
+      alert("Please select exactly one user to update.");
+      this.selectedUser = null;
+    }
+  }
+
+  updateUser() {
+    if (this.selectedUser) {
+      this.userService.updateUser(this.selectedUser.id, this.selectedUser).subscribe(
+        () => {
+          this.loadUsers();
+          this.selectedUser = null;
+        },
+        error => console.error('Error updating user', error)
+      );
+    }
+  }
+
+  cancelUpdate() {
+    this.selectedUser = null; 
   }
 }
 

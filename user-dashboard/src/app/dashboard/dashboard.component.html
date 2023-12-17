@@ -2,7 +2,7 @@
     <h2>Users</h2>
   
     <button (click)="deleteSelectedUsers()">Delete Selected</button>
-    <!-- <button (click)="updateSelectedUsers()">Update Selected</button> -->
+    <button (click)="selectUserForUpdate()">Update Selected</button>
   
     <ul>
       <li *ngFor="let user of users">
@@ -10,5 +10,14 @@
         {{ user.username }} ({{ user.email }})
       </li>
     </ul>
+    <div *ngIf="selectedUser">
+        <h3>Update User</h3>
+        <form (ngSubmit)="updateUser()">
+          <input type="text" [(ngModel)]="selectedUser.username" name="username">
+          <input type="email" [(ngModel)]="selectedUser.email" name="email">
+          <button type="submit">Submit</button>
+          <button type="button" (click)="cancelUpdate()">Cancel</button>
+        </form>
+     </div>
 </div>
   
