@@ -24,10 +24,12 @@ export class SignupComponent {
     this.userService.register(this.user).subscribe(
       response => {
         console.log('Success!', response);
-        this.successMessage = 'Registration successful!';
+        this.successMessage = 'Registration successful! Redirecting...';
         this.user = { username: '', email: '', password: '' };
-        this.router.navigate(['/login']);
         this.isLoading = false;
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 3000);
       },
       error => {
         console.error('Error!', error);
