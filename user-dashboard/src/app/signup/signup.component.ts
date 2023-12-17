@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -13,6 +14,8 @@ export class SignupComponent {
     email: '',
     password: ''
   };  
+  
+  @ViewChild('signupForm', { static: false }) signupForm!: NgForm;
 
   successMessage: string = '';
   errorMessage: string = '';
@@ -27,6 +30,7 @@ export class SignupComponent {
         this.successMessage = 'Registration successful! Redirecting...';
         this.user = { username: '', email: '', password: '' };
         this.isLoading = false;
+        this.signupForm.reset();
         setTimeout(() => {
           this.router.navigate(['/login']);
         }, 3000);
