@@ -37,6 +37,16 @@ app.post('/register', (req, res) => {
     });
   });
 
+  app.get('/users', (req, res) => {
+    const query = 'SELECT id, username, email FROM users';
+    connection.query(query, (error, results) => {
+      if (error) {
+        return res.status(500).send('Error fetching users');
+      }
+      res.json(results);
+    });
+  });
+
   app.post('/login', (req, res) => {
     const { email, password } = req.body;
   

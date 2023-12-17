@@ -24,7 +24,7 @@ export class LoginComponent {
         this.successMessage = 'Login successful! Redirecting to dashboard...';
         localStorage.setItem('token', response.token); 
         setTimeout(() => {
-          // this.router.navigate(['/dashboard']);
+          this.router.navigate(['/dashboard']);
         }, 3000);
       },
       error => {
