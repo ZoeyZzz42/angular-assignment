@@ -108,13 +108,9 @@ app.post('/register', (req, res) => {
         return res.status(404).send('User not found');
       }
   
-      res.status(200).send('User deleted successfully');
+      res.status(204).send('User deleted successfully');
     });
   });
-  
-  
-  
-  
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

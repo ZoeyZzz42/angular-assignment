@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,19 +13,29 @@ export class DashboardComponent implements OnInit {
 
   constructor(private userService: UserService) {}
 
+ 
   ngOnInit(): void {
+    this.loadUsers();
+  }
+
+  loadUsers() {
     this.userService.getAllUsers().subscribe(
-      data => {
-        this.users = data;
-      },
-      error => {
-        console.error('Error fetching users', error);
-      }
+      data => this.users = data,
+      error => console.error('Error fetching users', error)
     );
   }
 
-  deleteUser(userId: number) {
-    // Logic to delete user
+  deleteSelectedUsers() {
+    const selectedUserIds = this.users.filter(user => user.selected).map(user => user.id);
+    const deleteRequests = selectedUserIds.map(userId => this.userService.deleteUser(userId));
+    forkJoin(deleteRequests).subscribe(
+      () => {
+        this.loadUsers();
+      },
+      error => {
+        console.error('Error deleting users', error);
+      }
+    );
   }
 
   updateUser(user: any) {
